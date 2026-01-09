@@ -102,7 +102,7 @@ export const projects = [
     ],
     techStack: ["React 18", "Tailwind CSS", "FastAPI", "Python", "MongoDB"],
     category: "Full Stack",
-    github: "https://github.com/St10135518",
+    github: "https://github.com/St10135518/Kamelec1",
     image: null
   },
   {
@@ -119,7 +119,7 @@ export const projects = [
     ],
     techStack: ["Python", "Machine Learning", "NLP", "FastAPI", "React"],
     category: "AI/ML",
-    github: "https://github.com/St10135518",
+    github: "https://github.com/St10135518/Financial-Empowerment-AI",
     image: null
   },
   {

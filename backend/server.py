@@ -1,14 +1,17 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel, Field, ConfigDict, EmailStr
 from typing import List
 import uuid
 from datetime import datetime, timezone
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 
 ROOT_DIR = Path(__file__).parent
@@ -36,6 +39,12 @@ class StatusCheck(BaseModel):
 
 class StatusCheckCreate(BaseModel):
     client_name: str
+
+class ContactMessage(BaseModel):
+    name: str
+    email: EmailStr
+    subject: str
+    message: str
 
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
@@ -65,6 +74,69 @@ async def get_status_checks():
             check['timestamp'] = datetime.fromisoformat(check['timestamp'])
     
     return status_checks
+
+@api_router.post("/contact")
+async def send_contact_message(contact: ContactMessage):
+    try:
+        # Get email configuration from environment
+        smtp_server = os.environ.get('SMTP_SERVER', 'smtp.gmail.com')
+        smtp_port = int(os.environ.get('SMTP_PORT', '587'))
+        sender_email = os.environ.get('SENDER_EMAIL')
+        sender_password = os.environ.get('SENDER_PASSWORD')
+        recipient_email = os.environ.get('RECIPIENT_EMAIL')
+        
+        if not all([sender_email, sender_password, recipient_email]):
+            raise HTTPException(status_code=500, detail="Email configuration is incomplete")
+        
+        # Create email message
+        msg = MIMEMultipart('alternative')
+        msg['Subject'] = f"Portfolio Contact: {contact.subject}"
+        msg['From'] = sender_email
+        msg['To'] = recipient_email
+        msg['Reply-To'] = contact.email
+        
+        # Create HTML email body
+        html_body = f"""
+        <html>
+          <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+            <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+              <h2 style="color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 10px;">New Contact Form Submission</h2>
+              
+              <div style="margin: 20px 0;">
+                <p style="margin: 10px 0;"><strong>From:</strong> {contact.name}</p>
+                <p style="margin: 10px 0;"><strong>Email:</strong> <a href="mailto:{contact.email}">{contact.email}</a></p>
+                <p style="margin: 10px 0;"><strong>Subject:</strong> {contact.subject}</p>
+              </div>
+              
+              <div style="margin-top: 20px; padding: 15px; background-color: #f8f9fa; border-left: 4px solid #2563eb; border-radius: 3px;">
+                <h3 style="margin-top: 0; color: #2563eb;">Message:</h3>
+                <p style="white-space: pre-wrap;">{contact.message}</p>
+              </div>
+              
+              <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 12px; color: #666;">
+                <p>This message was sent from your portfolio website contact form.</p>
+              </div>
+            </div>
+          </body>
+        </html>
+        """
+        
+        # Attach HTML body
+        html_part = MIMEText(html_body, 'html')
+        msg.attach(html_part)
+        
+        # Send email
+        with smtplib.SMTP(smtp_server, smtp_port) as server:
+            server.starttls()
+            server.login(sender_email, sender_password)
+            server.send_message(msg)
+        
+        logger.info(f"Contact form submitted by {contact.name} ({contact.email})")
+        return {"success": True, "message": "Message sent successfully"}
+        
+    except Exception as e:
+        logger.error(f"Error sending contact email: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to send message: {str(e)}")
 
 # Include the router in the main app
 app.include_router(api_router)

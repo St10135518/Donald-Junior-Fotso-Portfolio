@@ -123,13 +123,12 @@ const HeroSection = () => {
               
               {/* Main avatar container */}
               <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-gradient-to-br from-blue-600 to-blue-400 rounded-full p-2 shadow-2xl shadow-blue-600/20">
-                <div className="w-full h-full bg-gradient-to-br from-slate-100 to-white rounded-full flex items-center justify-center">
-                  <div className="text-center">
-                    <span className="text-6xl sm:text-7xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-blue-600 to-blue-400">
-                      DJ
-                    </span>
-                    <p className="text-slate-500 text-sm mt-2">Full Stack Developer</p>
-                  </div>
+                <div className="w-full h-full bg-white rounded-full overflow-hidden flex items-center justify-center">
+                  <img 
+                    src="/images/profile.jpg" 
+                    alt="Donald Fotso Junior" 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
 
