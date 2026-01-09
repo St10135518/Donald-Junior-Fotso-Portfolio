@@ -30,7 +30,7 @@ const ContactSection = () => {
     setError('');
     
     try {
-      const response = await axios.post('http://localhost:8000/api/contact', formData);
+      const response = await axios.post('https://donald-junior-fotso-portfolio.onrender.com/api/contact', formData);
       
       if (response.data.success) {
         setIsSubmitted(true);
