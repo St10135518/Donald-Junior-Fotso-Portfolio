@@ -26,6 +26,12 @@ const AboutSection = () => {
     }
   ];
 
+  // Split summary into two paragraphs and slightly increase font size
+  const summary = personalInfo.summary || "";
+  const splitIndex = summary.indexOf("Strong foundation");
+  const firstPara = splitIndex !== -1 ? summary.slice(0, splitIndex).trim() : summary;
+  const secondPara = splitIndex !== -1 ? summary.slice(splitIndex).trim() : "";
+
   return (
     <section id="about" className="py-20 md:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -47,14 +53,12 @@ const AboutSection = () => {
           {/* Bio Content */}
           <div>
             <div className="prose prose-lg prose-slate">
-              <p className="text-slate-600 leading-relaxed mb-6">
-                {personalInfo.summary}
-              </p>
-              <p className="text-slate-600 leading-relaxed mb-8">
-                With a strong foundation in software engineering principles, database optimization, 
-                and agile project management, I have a proven ability to translate complex business 
-                problems into scalable technical solutions.
-              </p>
+              {firstPara && (
+                <p className="text-slate-700 text-lg md:text-xl leading-relaxed mb-6">{firstPara}</p>
+              )}
+              {secondPara && (
+                <p className="text-slate-700 text-lg md:text-xl leading-relaxed mb-8">{secondPara}</p>
+              )}
             </div>
 
             {/* Core Strengths */}

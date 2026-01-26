@@ -11,7 +11,7 @@ export const personalInfo = {
   linkedin: "https://www.linkedin.com/in/donald-junior-fotso-4737481b1/",
   github: "https://github.com/St10135518",
   cvUrl: "https://customer-assets.emergentagent.com/job_donald-developer/artifacts/69k9zui9_Donald_Fotso_Junior_CV_2025.pdf",
-  summary: "Honours-level Informatics graduate with specialized expertise in business analytics, data science, and software engineering. Proficient in statistical modeling, machine learning (scikit-learn, TensorFlow), and full-stack development (Python, Java, SQL). Demonstrated experience building data-driven solutions through hackathons and research projects, including AI-powered predictive systems and mobile applications. Strong foundation in software engineering principles, database optimization, and agile project management."
+  summary: "Results-driven Honours Informatics graduate with specialized expertise in software development, business analytics, and Microsoft ecosystem solutions. Proficient in full-stack development (Python, Java, JavaScript, SQL), API integration, and translating complex business requirements into scalable technical solutions. Demonstrated experience delivering data-driven applications through professional roles, hackathons, and research projects, including CRM systems, AI-powered predictive solutions, and mobile applications. Strong foundation in Microsoft Dynamics 365, Power Platform, Agile methodologies, and the complete Software Development Lifecycle (SDLC). Proven ability to bridge technical development and business analysis, driving operational efficiency and stakeholder value through innovative, client-focused solutions."
 };
 
 export const education = [
@@ -43,13 +43,20 @@ export const skills = {
   technical: [
     { name: "Python", category: "Languages" },
     { name: "Java", category: "Languages" },
+    { name: "JavaScript", category: "Languages" },
+    { name: "C#", category: "Languages" },
     { name: "SQL", category: "Languages" },
     { name: "React", category: "Frontend" },
+    { name: "HTML/CSS", category: "Frontend" },
+    { name: "TypeScript", category: "Frontend" },
     { name: "FastAPI", category: "Backend" },
+    { name: "Node.js", category: "Backend" },
+    { name: ".NET", category: "Backend" },
     { name: "REST APIs", category: "Backend" },
     { name: "GraphQL", category: "Backend" },
     { name: "MongoDB", category: "Database" },
     { name: "Docker", category: "DevOps" },
+    { name: "Azure DevOps", category: "DevOps" },
     { name: "Git/GitHub", category: "Tools" }
   ],
   dataScience: [
@@ -67,16 +74,39 @@ export const skills = {
   ],
   business: [
     { name: "Requirements Gathering", category: "Analysis" },
+    { name: "Requirements Documentation", category: "Analysis" },
+    { name: "Functional Specifications", category: "Analysis" },
     { name: "Business Process Analysis", category: "Analysis" },
     { name: "Stakeholder Management", category: "Management" },
+    { name: "Project Management", category: "Management" },
+    { name: "Client Collaboration", category: "Management" },
     { name: "Agile/Scrum", category: "Methodology" },
+    { name: "SDLC", category: "Methodology" },
     { name: "A/B Testing", category: "Testing" },
     { name: "User Acceptance Testing", category: "Testing" },
+    { name: "Regression Testing", category: "Testing" },
+    { name: "Test Case Development", category: "Testing" },
     { name: "System Integration", category: "Implementation" },
+    { name: "API Integration", category: "Implementation" },
+    { name: "Data Migration", category: "Implementation" },
     { name: "CRM Implementation", category: "Implementation" }
   ],
   tools: [
-    "VS Code", "Jupyter", "Microsoft Visio", "Lucidchart", "Draw.io", "Balsamiq"
+    "VS Code",
+    "Jupyter",
+    "Microsoft Visio",
+    "Lucidchart",
+    "Draw.io",
+    "Balsamiq",
+    "Power Apps",
+    "Power Automate",
+    "Power BI",
+    "Figma",
+    "SQL Server Management Studio",
+    "Confluence",
+    "JIRA",
+    "Azure DevOps",
+    "Postman"
   ],
   languages: [
     { name: "English", level: "Native" },
@@ -210,9 +240,13 @@ export const hackathons = [
 ];
 
 export const coreStrengths = [
+  "Microsoft Dynamics 365",
+  "Power Platform Development",
+  "Full-Stack Development",
   "Data Science",
-  "Machine Learning",
   "Software Engineering",
-  "Business Analytics",
-  "Full-Stack Development"
+  "Business Analysis",
+  "API Integration",
+  "Agile Methodologies",
+  "Machine Learning"
 ];
